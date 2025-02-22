@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import BloodPressureMonitor from '../assets/bloodpressure.jpg';
-import Stethoscope from '../assets/stethoscope.jpg';
+import Stethoscope from '../assets/Stethoscope.jpg';
 import Thermometer from '../assets/Thermometer.jpg';
 import NurseWatch from '../assets/NurseWatch.jpg';
 import NurseUniform from '../assets/NurseUniform.webp';
