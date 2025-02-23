@@ -1,3 +1,4 @@
+import { OrderStatus } from "@prisma/client";
 import db from "../db/index.js";
 
 export const createOrder = async (req, res) => {
@@ -150,7 +151,6 @@ export const getOrderDetails = async (req, res) => {
 export const updateOrderStatus = async (req, res) => {
   try {
     const { orderId } = req.params;
-    const { status } = req.body;
 
     const existingOrder = await db.order.findUnique({
       where: {
@@ -162,22 +162,12 @@ export const updateOrderStatus = async (req, res) => {
       res.status(404).json({ message: "Order not found" });
     }
 
-    const order = await db.order.findUnique({
-      where: {
-        id: Number(orderId),
-      },
-    });
-
-    if (!order) {
-      res.status(404).json({ message: "Order not found" });
-    }
-
-    const updatedOrder = db.order.update({
+    const updatedOrder = await db.order.update({
       where: {
         id: Number(orderId),
       },
       data: {
-        status,
+        status: OrderStatus.CONFIRMED,
       },
     });
 
