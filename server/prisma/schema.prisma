@@ -35,6 +35,7 @@ model Order {
   orderItems  OrderItem[]
   totalAmount Int
   createdAt   DateTime    @default(now())
+  status      OrderStatus @default(PENDING)
 }
 
 model OrderItem {
@@ -52,4 +53,9 @@ model OrderItem {
 enum Role {
   ADMIN
   CUSTOMER
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
 }
