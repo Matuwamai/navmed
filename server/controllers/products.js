@@ -47,7 +47,7 @@ export const getProductDetails = async (req, res) => {
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
-    res.status(product);
+    res.status(200).json(product);
   } catch (error) {
     res.status(500).json({ message: "Error fetching products" });
   }
@@ -57,6 +57,16 @@ export const updateProduct = async (req, res) => {
   try {
     const { productId } = req.params;
     const { name, image, price, description } = req.body;
+
+    const existingProduct = await db.product.findUnique({
+      where: {
+        id: Number(productId),
+      },
+    });
+
+    if (!existingProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
 
     const product = await db.product.update({
       where: {
@@ -79,12 +89,22 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
   try {
     const { productId } = req.params;
+    const product = await db.product.findUnique({
+      where: {
+        id: Number(productId),
+      },
+    });
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
     await db.product.delete({
       where: {
         id: Number(productId),
       },
     });
-    res.status(204);
+    res.status(204).json();
   } catch (error) {
     res.status(500).json({ message: "Error delete product" });
   }
