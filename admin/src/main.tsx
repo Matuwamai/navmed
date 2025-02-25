@@ -11,6 +11,7 @@ import Order from './pages/Order'
 import Product from './pages/Product'
 import Users from './pages/Users'
 import CreateProduct from './components/CreateProduct';
+import UpdateProduct from './components/Updateproduct';
 
 
 
@@ -28,6 +29,8 @@ createRoot(document.getElementById('root')!).render(
     <Route path='/orders' element={<Orders />} />
     <Route path='/users' element={<Users/>} />
     <Route path='/create-product' element={<CreateProduct/>} />
+    <Route path="/products/update/:id" element={<UpdateProduct />} />
+
     </Route >
     
     </Routes>
