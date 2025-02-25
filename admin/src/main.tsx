@@ -10,6 +10,7 @@ import Orders from './pages/Orders'
 import Order from './pages/Order'
 import Product from './pages/Product'
 import Users from './pages/Users'
+import CreateProduct from './components/CreateProduct';
 
 
 
@@ -21,11 +22,12 @@ createRoot(document.getElementById('root')!).render(
     <Route path='/login' element={<Login />} />
     < Route  element={<Layout />} > 
     <Route path='/product/:id' element={<Product />} />
-    <Route path='/product' element={<Products />} />
+    <Route path='/products' element={<Products />} />
     <Route path='/product/:id' element={<Products />} />
     <Route path='/order/:id' element={<Order />} />
     <Route path='/orders' element={<Orders />} />
-    <Route path='/' element={<Users/>} />
+    <Route path='/users' element={<Users/>} />
+    <Route path='/create-product' element={<CreateProduct/>} />
     </Route >
     
     </Routes>
