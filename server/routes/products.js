@@ -4,7 +4,7 @@ import { auth, isAdmin } from "../middleware/auth.js";
 
 const productRouter = express.Router();
 
-productRouter.post("/create", auth, isAdmin, createProduct);
+productRouter.post("/create", createProduct);
 productRouter.get("/", listProduct);
 productRouter.get("/:productId", getProductDetails);
 productRouter.put("/:productId/edit", auth, isAdmin, updateProduct);

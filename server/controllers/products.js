@@ -4,17 +4,13 @@ export const createProduct = async (req, res) => {
   try {
     const { name, image, price, description } = req.body;
 
-    if (name === "" || image === "" || price === "" || description === "") {
-      return res.status(403).json({ message: "All fields required!" });
+    // Validate input fields
+    if (!name || !image || !price || !description) {
+      return res.status(400).json({ message: "All fields are required!" });
     }
 
     const product = await db.product.create({
-      data: {
-        name,
-        image,
-        price,
-        description,
-      },
+      data: { name, image, price, description },
     });
 
     res.status(201).json(product);
