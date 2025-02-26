@@ -91,3 +91,12 @@ export const login = async (req, res) => {
     res.status(500).json({ message: "Error while trying to login" });
   }
 };
+export const listUsers = async (req, res) => {
+  try {
+    const users = await db.user.findMany();
+    res.status(200).json(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error fetching users" });
+  }
+};

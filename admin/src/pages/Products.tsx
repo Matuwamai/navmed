@@ -12,7 +12,7 @@ const Products = () => {
 
   useEffect(() => {
     // Fetch products from API (Replace with your actual API endpoint)
-    fetch("https://your-api-endpoint.com/products")
+    fetch(" http://localhost:5000/api/products")
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.error("Error fetching products:", err));

@@ -1,7 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import './index.css'
 import Login from './pages/Login'
 import Layout from './components/Layout';
@@ -12,8 +11,7 @@ import Product from './pages/Product'
 import Users from './pages/Users'
 import CreateProduct from './components/CreateProduct';
 import UpdateProduct from './components/Updateproduct';
-
-
+import Register from './pages/Admiregister';
 
 
 createRoot(document.getElementById('root')!).render(
@@ -28,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
     <Route path='/order/:id' element={<Order />} />
     <Route path='/orders' element={<Orders />} />
     <Route path='/users' element={<Users/>} />
+    <Route path='/create-admin' element={<Register/>} />
     <Route path='/create-product' element={<CreateProduct/>} />
     <Route path="/products/update/:id" element={<UpdateProduct />} />
 

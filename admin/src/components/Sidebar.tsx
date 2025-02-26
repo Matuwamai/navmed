@@ -26,7 +26,7 @@ const Sidebar = () => {
           <FaUsers size={20} /> Users
         </Link>
 
-        <Link to="/logout" className="flex items-center gap-3 p-2 hover:bg-red-500 rounded-lg mt-auto">
+        <Link to="/create-admin" className="flex items-center gap-3 p-2 hover:bg-red-500 rounded-lg mt-auto">
           <FaSignOutAlt size={20} /> Logout
         </Link>
       </nav>

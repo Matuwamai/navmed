@@ -13,7 +13,7 @@ const Users = () => {
 
   useEffect(() => {
     // Fetch users from API (Replace with your actual API endpoint)
-    fetch("https://your-api-endpoint.com/users")
+    fetch("http:/localhost:5000/api/users//users-lists")
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((err) => console.error("Error fetching users:", err));
