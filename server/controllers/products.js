@@ -50,6 +50,10 @@ export const updateProduct = async (req, res) => {
     const { productId } = req.params;
     const { name, image, price, description } = req.body;
 
+    if (!name || !image || !price || !description) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
     const existingProduct = await db.product.findUnique({
       where: {
         id: Number(productId),
@@ -60,23 +64,23 @@ export const updateProduct = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    const product = await db.product.update({
-      where: {
-        id: Number(productId),
-      },
-      data: {
-        name,
-        image,
-        description,
-        price,
+    const updatedProduct = await db.product.update({
+      where: { id: Number(productId) },
+      data: { 
+        name, 
+        image, 
+        description, 
+        price: Number(price)  // ✅ Convert price to number
       },
     });
 
-    res.status(200).json(product);
+    res.status(200).json(updatedProduct);
   } catch (error) {
+    console.error("Error updating product:", error);
     res.status(500).json({ message: "Error updating product" });
   }
 };
+
 
 export const deleteProduct = async (req, res) => {
   try {

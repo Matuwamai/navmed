@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 interface Product {
   id: number;
@@ -10,6 +13,7 @@ interface Product {
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     // Fetch products from API (Replace with your actual API endpoint)
@@ -35,11 +39,10 @@ const Products = () => {
       alert(`Failed to delete product: ${error.response?.data?.message || error.message}`);
     }
   };
-  
   const handleUpdate = (id: number) => {
-    // Handle update logic (Redirect or open update modal)
-    console.log(`Updating product with ID: ${id}`);
+    navigate(`/products/update/${id}`); // Navigate to update page with the product ID
   };
+
 
   return (
     <div className="p-5">
@@ -65,13 +68,14 @@ const Products = () => {
                 <td className="p-3">{product.name}</td>
                 <td className="p-3">{product.description}</td>
                 <td className="p-3 text-center space-x-2">
-                  <button 
-                    onClick={() => handleUpdate(product.id)}
+                  <button
+                      onClick={() => handleUpdate(product.id)}
                     className="bg-green-600 text-white px-3 py-2 rounded-md hover:bg-green-800 transition"
                   >
                     Update
+                  
                   </button>
-                  <button 
+                  <button
                     onClick={() => handleDelete(product.id)}
                     className="bg-red-600 text-white px-3 py-2 rounded-md hover:bg-red-800 transition"
                   >
