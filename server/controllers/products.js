@@ -3,12 +3,9 @@ import db from "../db/index.js";
 export const createProduct = async (req, res) => {
   try {
     const { name, image, price, description } = req.body;
-
-    // Validate input fields
     if (!name || !image || !price || !description) {
       return res.status(400).json({ message: "All fields are required!" });
     }
-
     const product = await db.product.create({
       data: { name, image, price, description },
     });
@@ -19,7 +16,6 @@ export const createProduct = async (req, res) => {
     res.status(500).json({ message: "Error creating product" });
   }
 };
-
 export const listProduct = async (req, res) => {
   try {
     const products = await db.product.findMany();

@@ -8,7 +8,7 @@ const Sidebar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/logout", {
+      const response = await fetch("http://localhost:5000/api/users/logout", {
         method: "POST",
         credentials: "include",
       });
@@ -29,7 +29,7 @@ const Sidebar = () => {
     <>
       {/* Mobile Toggle Button */}
       <button
-        className="fixed top-5 left-5 z-50 text-white bg-blue-600 p-2 rounded-lg md:hidden"
+        className="fixed top-0 left-5 z-50 text-white bg-blue-600 p-2 rounded-lg md:hidden"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <FaTimes size={25} /> : <FaBars size={25} />}

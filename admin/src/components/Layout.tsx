@@ -5,21 +5,22 @@ import Sidebar from "./Sidebar";
 
 const Layout = () => {
   return (
-    <div className="flex flex-col h-screen">
-      {/* Navbar at the top */}
-      <Navbar />
-      
-      <div className="flex flex-1">
-        {/* Sidebar on the left */}
-        <Sidebar />
-        
-        {/* Main content area where other pages will render */}
-        <div className="flex-1 p-5">
+    <div className="flex">
+      {/* Sidebar on the left, fixed to start from the top */}
+      <Sidebar />
+
+      <div className="flex flex-col flex-1">
+        {/* Navbar at the top */}
+        <Navbar />
+
+        {/* Main content area */}
+        <div className="p-5">
           <Outlet />
         </div>
       </div>
     </div>
   );
 };
+
 
 export default Layout;

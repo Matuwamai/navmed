@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 interface Product {
   id: number;
@@ -18,9 +19,18 @@ const Products = () => {
       .catch((err) => console.error("Error fetching products:", err));
   }, []);
 
-  const handleDelete = (id: number) => {
-    // Handle delete logic (API call)
-    console.log(`Deleting product with ID: ${id}`);
+  const handleDelete = async (id: number) => {
+  
+    try {
+      await axios.delete(`http://localhost:5000/api/products/:productId/delet` ); // Update with your API URL
+      alert("Product deleted successfully!");
+  
+      // Update UI after deletion (filter out the deleted product)
+      setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id));
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      alert("Failed to delete product.");
+    }
   };
 
   const handleUpdate = (id: number) => {
