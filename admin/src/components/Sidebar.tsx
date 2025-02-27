@@ -58,7 +58,7 @@ const Sidebar = () => {
             <FaUsers size={20} /> Users
           </Link>
 
-          <Link to="/create-user" className="flex items-center gap-3 p-2 hover:bg-green-500 rounded-lg">
+          <Link to="/create-admin" className="flex items-center gap-3 p-2 hover:bg-green-500 rounded-lg">
             <FaUserPlus size={20} /> Create User
           </Link>
 

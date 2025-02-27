@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 interface User {
   id: number;
-  name: string;
+  fullName: string;
   email: string;
   contact: string;
   created_at: string;
@@ -39,7 +39,7 @@ const Users = () => {
             {users.map((user, index) => (
               <tr key={user.id} className={`border-b border-gray-200 ${index % 2 === 0 ? "bg-gray-100" : "bg-white"}`}>
                 <td className="p-3 text-xs md:text-sm">{user.id}</td>
-                <td className="p-3 text-xs md:text-sm">{user.name}</td>
+                <td className="p-3 text-xs md:text-sm">{user.fullName}</td>
                 <td className="p-3 text-xs md:text-sm">{user.email}</td>
                 <td className="p-3 text-xs md:text-sm">{user.contact}</td>
                 <td className="p-3 text-xs md:text-sm">{new Date(user.created_at).toLocaleDateString()}</td>

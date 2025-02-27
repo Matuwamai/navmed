@@ -81,23 +81,33 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
   try {
     const { productId } = req.params;
+    
+    console.log("Raw productId from request:", req.params); // Debugging step
+
+    // Ensure productId is a valid number
+    const id = Number(productId);
+    if (isNaN(id)) {
+      console.log("Invalid productId:", productId); // Debugging
+      return res.status(400).json({ message: "Invalid product ID" });
+    }
+
     const product = await db.product.findUnique({
-      where: {
-        id: Number(productId),
-      },
+      where: { id },
     });
 
     if (!product) {
+      console.log("Product not found:", id);
       return res.status(404).json({ message: "Product not found" });
     }
 
     await db.product.delete({
-      where: {
-        id: Number(productId),
-      },
+      where: { id },
     });
+
+    console.log("Deleted product:", id);
     res.status(204).json();
   } catch (error) {
-    res.status(500).json({ message: "Error delete product" });
+    console.error("Error deleting product:", error);
+    res.status(500).json({ message: "Error deleting product" });
   }
 };

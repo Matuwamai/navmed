@@ -20,19 +20,22 @@ const Products = () => {
   }, []);
 
   const handleDelete = async (id: number) => {
-  
     try {
-      await axios.delete(`http://localhost:5000/api/products/:productId/delet` ); // Update with your API URL
+      const endpoint = `http://localhost:5000/api/products/${id}/delete`; // Use the correct endpoint
+      console.log(`Deleting product from: ${endpoint}`); // Debugging
+  
+      await axios.delete(endpoint); // Use correct route
+  
       alert("Product deleted successfully!");
   
-      // Update UI after deletion (filter out the deleted product)
+      // Remove the deleted product from the UI
       setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id));
-    } catch (error) {
-      console.error("Error deleting product:", error);
-      alert("Failed to delete product.");
+    } catch (error: any) {
+      console.error("Error deleting product:", error.response?.data || error.message);
+      alert(`Failed to delete product: ${error.response?.data?.message || error.message}`);
     }
   };
-
+  
   const handleUpdate = (id: number) => {
     // Handle update logic (Redirect or open update modal)
     console.log(`Updating product with ID: ${id}`);
