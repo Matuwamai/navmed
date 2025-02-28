@@ -138,4 +138,4 @@ function ProductsPage({ setCartCount }: ProductsPageProps) {
   );
 }
 
-export default ProductsPage;
+export default ProductsPage;

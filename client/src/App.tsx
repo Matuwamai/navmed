@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import NavMedNavbar from './components/Navbar'
-import HomePage from './pages/HomePage'
-import ProductsPage from './pages/ProductsPage'
+import NavMedNavbar from './componets/Navbar'
+import HomePage from './pages/Home'
+import ProductsPage from './pages/Products'
 
 const App: React.FC = () => {
   const basename = process.env.NODE_ENV === 'production' ? '/navmed' : '';

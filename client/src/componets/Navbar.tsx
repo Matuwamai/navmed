@@ -13,13 +13,13 @@ function NavMedNavbar({ cartCount }: NavMedNavbarProps) {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Searching for: ${searchTerm}`);
+    // alert(Searching for: ${searchTerm});
     setShowSearch(false);
   };
 
   return (
     <div className="bg-light">
-      <div className="d-flex justify-content-between align-items-center px-3 py-1 bg-primary text-white small">
+      <div className="flex justify-content-between align-items-center px-3 py-1 bg-primary text-white small">
         <div className="d-flex align-items-center">
           <FaPhoneAlt className="me-2" />
           <span>+254 712 345 678</span>
@@ -83,4 +83,4 @@ function NavMedNavbar({ cartCount }: NavMedNavbarProps) {
   );
 }
 
-export default NavMedNavbar;
+export default NavMedNavbar;

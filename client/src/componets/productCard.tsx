@@ -25,4 +25,4 @@ function ProductCard({ title, oldPrice, price, imageUrl }: ProductCardProps) {
   )
 }
 
-export default ProductCard
+export default ProductCard

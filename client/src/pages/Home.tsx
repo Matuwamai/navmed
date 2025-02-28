@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ProductsPage from './ProductsPage';
+import ProductsPage from './Products';
 
 function HomePage() {
   const [cartCount, setCartCount] = useState(0);
@@ -20,4 +20,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default HomePage;
