@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 interface Product {
@@ -26,13 +27,42 @@ function OrderPage() {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
-  const handlePlaceOrder = () => {
-    // Logic to place the order
-    alert('Order placed!');
-    localStorage.removeItem('cart'); // Clear cart after placing order
-    setCartItems([]);
+  const handlePlaceOrder = async () => {
+    try {
+      // Ensure cart has items
+      if (cartItems.length === 0) {
+        alert('Your cart is empty. Please add products to your cart.');
+        return;
+      }
+  
+      // Prepare order details
+      const orderDetails = {
+        products: cartItems.map((item) => ({
+          productId: item.id,
+          quantity: 1, // You can adjust this if you have a quantity system in place
+          price: item.price,
+        })),
+        userId: 'userIdPlaceholder', // Replace with actual user ID if available (e.g., from the logged-in user)
+        totalAmount: cartItems.reduce((acc, item) => acc + item.price, 0),
+      };
+  
+      // Send order details to the backend
+      const response = await axios.post('http://localhost:5000/api/orders/create', orderDetails); // Replace with your API endpoint
+      if (response.status === 200) {
+        alert('Order placed successfully!');
+        
+        // Clear the cart
+        localStorage.removeItem('cart');
+        setCartItems([]);
+      } else {
+        alert('Failed to place order. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error placing order:', error);
+      alert('An error occurred while placing your order. Please try again.');
+    }
   };
-
+  
   return (
     <div className="container my-4">
       <h2>Your Cart</h2>

@@ -7,7 +7,6 @@ const Register = () => {
         fullName: '',
         email: '',
         password: '',
-        role: 'admin',
         contact: ''
     });
     const [loading, setLoading] = useState(false);
