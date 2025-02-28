@@ -38,7 +38,7 @@ const Register = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="border p-4 border-gray-200 max-w-sm bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-blue-600">Create Your Account</h2>
+        <h2 className="text-blue-600">Singup</h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         {success && <p className="text-green-500 text-center mb-4">{success}</p>}
         

@@ -11,7 +11,7 @@ function HomePage() {
       </div>
 
       <div className="text-center mb-4">
-        <h1 className="text-maroon">Hello, Welcome to NavMed!</h1>
+        <h1 className="text-blue-600">Hello, Welcome to NavMed!</h1>
         <p>Your trusted online store for medical equipment.</p>
       </div>
 

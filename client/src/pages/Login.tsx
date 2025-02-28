@@ -1,46 +1,46 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// LoginPage.tsx
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../componets/Authcontext"; // Import useAuth
 
-interface LoginPageProps {
-  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function LoginPage({ setIsAuthenticated }: LoginPageProps) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+function LoginPage() {
+  const { login } = useAuth(); // Use login from AuthContext
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validation
+    // Validate inputs
     if (!email || !password) {
-      setError('Both fields are required.');
+      setError("Both fields are required.");
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', { email, password }); // Adjust API endpoint
+      const response = await axios.post("http://localhost:5000/api/users/login", { email, password });
+
       if (response.status === 200) {
-        const { token } = response.data; // Assuming the token is returned in the response data
+        const { token, user } = response.data;
+        localStorage.setItem("authToken", token);
+        localStorage.setItem("user", JSON.stringify(user)); // Store user data in localStorage
 
-        // Store token in localStorage
-        localStorage.setItem('authToken', token);
+        // Call login from context to set state
+        login(user.fullName, token);
 
-        // Update authentication state and redirect
-        setIsAuthenticated(true);
-        navigate('/'); // Redirect to home or order page
+        navigate("/"); // Redirect to a page after successful login (e.g., HomePage)
       }
     } catch (error) {
-      setError('Invalid email or password. Please try again.');
+      setError("Invalid email or password. Please try again.");
     }
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <div className="card p-4" style={{ maxWidth: '400px', width: '100%' }}>
+    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
+      <div className="card p-4" style={{ maxWidth: "400px", width: "100%" }}>
         <h3 className="text-center mb-4">Login</h3>
         <form onSubmit={handleLogin}>
           {error && <div className="alert alert-danger">{error}</div>}
