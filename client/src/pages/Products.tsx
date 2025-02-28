@@ -1,68 +1,36 @@
-import { useState } from 'react';
-import BloodPressureMonitor from '../assets/bloodpressure.jpg';
-import Stethoscope from '../assets/Stethoscope.jpg';
-import Thermometer from '../assets/Thermometer.jpg';
-import NurseWatch from '../assets/NurseWatch.jpg';
-import NurseUniform from '../assets/NurseUniform.webp';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 interface Product {
   id: number;
   name: string;
   oldPrice: number;
-  newPrice: number;
+  price: number;
   image: string;
   description: string;
 }
-
-const products: Product[] = [
-  {
-    id: 1,
-    name: 'Blood Pressure Monitor',
-    oldPrice: 15000,
-    newPrice: 12000,
-    image: BloodPressureMonitor,
-    description: 'Accurate blood pressure monitoring device for home and professional use.',
-  },
-  {
-    id: 2,
-    name: 'Stethoscope',
-    oldPrice: 5000,
-    newPrice: 3500,
-    image: Stethoscope,
-    description: 'High-quality stethoscope with clear sound for medical professionals.',
-  },
-  {
-    id: 3,
-    name: 'Thermometer',
-    oldPrice: 2000,
-    newPrice: 1500,
-    image: Thermometer,
-    description: 'Digital thermometer with fast readings and accurate temperature results.',
-  },
-  {
-    id: 4,
-    name: 'Nurse Watch',
-    oldPrice: 2000,
-    newPrice: 1500,
-    image: NurseWatch,
-    description: 'Durable nurse watch designed for healthcare professionals.',
-  },
-  {
-    id: 5,
-    name: 'Nurse Uniform',
-    oldPrice: 3000,
-    newPrice: 2500,
-    image: NurseUniform,
-    description: 'Comfortable and professional nurse uniform for hospital and clinic settings.',
-  },
-];
 
 interface ProductsPageProps {
   setCartCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function ProductsPage({ setCartCount }: ProductsPageProps) {
+  const [products, setProducts] = useState<Product[]>([]);  
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  // Fetch products from server
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/products');  // Replace with your API endpoint
+        setProducts(response.data);  // Assuming the response is an array of products
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleProductClick = (product: Product) => {
     setSelectedProduct(product);
@@ -93,7 +61,7 @@ function ProductsPage({ setCartCount }: ProductsPageProps) {
             <p className="text-danger">
               <s>Ksh {selectedProduct.oldPrice}</s>
             </p>
-            <p className="text-success fw-bold">Ksh {selectedProduct.newPrice}</p>
+            <p className="text-success fw-bold">Ksh {selectedProduct.price}</p>
             <button
               className="btn btn-primary"
               onClick={(e) => handleAddToCart(e)}
@@ -122,7 +90,7 @@ function ProductsPage({ setCartCount }: ProductsPageProps) {
                 <p className="text-danger">
                   <s>Ksh {product.oldPrice}</s>
                 </p>
-                <p className="text-success fw-bold">Ksh {product.newPrice}</p>
+                <p className="text-success fw-bold">Ksh {product.price}</p>
                 <button
                   className="btn btn-sm btn-outline-primary"
                   onClick={(e) => handleAddToCart(e, product)}
@@ -138,4 +106,4 @@ function ProductsPage({ setCartCount }: ProductsPageProps) {
   );
 }
 
-export default ProductsPage;
+export default ProductsPage;
