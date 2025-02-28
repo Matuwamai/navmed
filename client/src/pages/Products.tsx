@@ -39,7 +39,20 @@ function ProductsPage({ setCartCount }: ProductsPageProps) {
 
   const handleAddToCart = (e: React.MouseEvent, product?: Product) => {
     e.stopPropagation();
-    setCartCount((prev) => prev + 1);
+    
+    if (product) {
+      // Get the current cart from localStorage
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      // Add the new product to the cart
+      cart.push(product);
+
+      // Update the localStorage with the new cart
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Update the cart count in the state
+      setCartCount(cart.length);
+    }
+
     if (product) setSelectedProduct(product);
     window.scrollTo({ top: 0, behavior: 'smooth' }); // Optional: Scroll to top when adding to cart
   };
@@ -64,7 +77,7 @@ function ProductsPage({ setCartCount }: ProductsPageProps) {
             <p className="text-success fw-bold">Ksh {selectedProduct.price}</p>
             <button
               className="btn btn-primary"
-              onClick={(e) => handleAddToCart(e)}
+              onClick={(e) => handleAddToCart(e, selectedProduct)}
             >
               Add to Cart
             </button>

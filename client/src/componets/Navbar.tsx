@@ -63,7 +63,7 @@ function NavMedNavbar({ cartCount }: NavMedNavbarProps) {
 
             {!showSearch && (
               <>
-                <a href="/cart" className="btn btn-light me-2 position-relative" style={{ color: '#ec0e63' }}>
+                <a href="/order" className="btn btn-light me-2 position-relative" style={{ color: '#ec0e63' }}>
                   <FaShoppingCart />
                   {cartCount > 0 && (
                     <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -83,4 +83,4 @@ function NavMedNavbar({ cartCount }: NavMedNavbarProps) {
   );
 }
 
-export default NavMedNavbar;
+export default NavMedNavbar;
