@@ -6,6 +6,7 @@ import ProductsPage from "./pages/Products";
 import OrderPage from "./pages/OrderPage";
 import LoginPage from "./pages/Login";
 import Register from "./pages/Register";
+import Footer from "./componets/Footer";
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth(); // Use AuthContext to get isAuthenticated
@@ -26,6 +27,7 @@ const App: React.FC = () => {
           <Route path="/register" element={<Register />} />
         </Routes>
       </div>
+      <Footer />
     </Router>
   );
 };

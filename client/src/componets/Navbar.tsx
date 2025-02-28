@@ -108,7 +108,7 @@ function NavMedNavbar({ cartCount }: { cartCount: number }) {
               <DropdownToggle tag="button" className="btn btn-light me-2" style={{ color: '#ec0e63' }}>
                 <FaUser />
                 {isAuthenticated && fullName ? (
-                  <span className="text-blue-600">Hi {fullName}</span>
+                  <span className="text-blue-600">Hi {fullName [ ]}</span>
                 
                 ) : (
                   <span className="ms-2">Account</span>
