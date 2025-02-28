@@ -19,7 +19,7 @@ export const createOrder = async (req, res) => {
         });
         return {
           productId: productData.id,
-          quantity: product.qty,
+          quantity: product.quantity,
           price: productData.price,
         };
       })

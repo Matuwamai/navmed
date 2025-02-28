@@ -17,11 +17,10 @@ const App: React.FC = () => {
       <NavMedNavbar cartCount={0} />
       <div className="container mt-4">
         <Routes>
-          <Route path="/" element={isAuthenticated ? <HomePage /> : <LoginPage />} />
+          <Route path="/" element={<HomePage /> } />
           <Route
             path="/products"
-            element={isAuthenticated ? <ProductsPage setCartCount={() => { }} /> : <LoginPage />}
-          />
+            element={<ProductsPage setCartCount={() => { }} /> }/>
           <Route path="/order" element={isAuthenticated ? <OrderPage /> : <LoginPage />} />
           <Route path="/login" element={isAuthenticated ? <HomePage /> : <LoginPage />} />
           <Route path="/register" element={<Register />} />

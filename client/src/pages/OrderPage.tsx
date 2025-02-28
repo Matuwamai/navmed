@@ -12,6 +12,8 @@ interface Product {
 
 function OrderPage() {
   const [cartItems, setCartItems] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Retrieve the cart from localStorage
@@ -34,21 +36,40 @@ function OrderPage() {
         alert('Your cart is empty. Please add products to your cart.');
         return;
       }
-  
+
+      // Retrieve token from localStorage (from a previous login)
+      const { token } = JSON.parse(localStorage.getItem('user') || '{}');
+
+      if (!token) {
+        alert('You must be logged in to place an order.');
+        return;
+      }
+
+      setLoading(true); // Show loading state
+      setError(null); // Reset any previous errors
+
       // Prepare order details
       const orderDetails = {
         products: cartItems.map((item) => ({
           productId: item.id,
-          quantity: 1, // You can adjust this if you have a quantity system in place
+          quantity: 1, // Adjust quantity if needed
           price: item.price,
         })),
-        userId: 'userIdPlaceholder', // Replace with actual user ID if available (e.g., from the logged-in user)
         totalAmount: cartItems.reduce((acc, item) => acc + item.price, 0),
       };
-  
+
       // Send order details to the backend
-      const response = await axios.post('http://localhost:5000/api/orders/create', orderDetails); // Replace with your API endpoint
-      if (response.status === 200) {
+      const response = await axios.post(
+        'http://localhost:5000/api/orders/create',
+        orderDetails, // Send the order data
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include the token in the headers
+          },
+        }
+      );
+
+      if (response.status === 201) {
         alert('Order placed successfully!');
         
         // Clear the cart
@@ -57,15 +78,21 @@ function OrderPage() {
       } else {
         alert('Failed to place order. Please try again later.');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error placing order:', error);
-      alert('An error occurred while placing your order. Please try again.');
+      setError('An error occurred while placing your order. Please try again.');
+    } finally {
+      setLoading(false); // Hide loading spinner
     }
   };
-  
+
   return (
     <div className="container my-4">
       <h2>Your Cart</h2>
+
+      {/* Display error message if any */}
+      {error && <div className="alert alert-danger">{error}</div>}
+
       <div className="row">
         {cartItems.map((item) => (
           <div key={item.id} className="col-12 mb-3">
@@ -91,8 +118,12 @@ function OrderPage() {
 
       {cartItems.length > 0 && (
         <div className="d-flex justify-content-between">
-          <button className="btn btn-danger" onClick={handlePlaceOrder}>
-            Place Order
+          <button className="btn btn-danger" onClick={handlePlaceOrder} disabled={loading}>
+            {loading ? (
+              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            ) : (
+              'Place Order'
+            )}
           </button>
           <span className="fw-bold">Total: Ksh {cartItems.reduce((acc, item) => acc + item.price, 0)}</span>
         </div>
