@@ -86,12 +86,10 @@ export const deleteProduct = async (req, res) => {
   try {
     const { productId } = req.params;
     
-    console.log("Raw productId from request:", req.params); // Debugging step
-
-    // Ensure productId is a valid number
+    console.log("Raw productId from request:", req.params); 
     const id = Number(productId);
     if (isNaN(id)) {
-      console.log("Invalid productId:", productId); // Debugging
+      console.log("Invalid productId:", productId); 
       return res.status(400).json({ message: "Invalid product ID" });
     }
 

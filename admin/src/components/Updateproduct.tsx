@@ -5,7 +5,7 @@ const UpdateProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [image, setImage] = useState(""); // Now stores image URL instead of a file
+  const [image, setImage] = useState(""); 
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [existingImage, setExistingImage] = useState("");
@@ -19,8 +19,8 @@ const UpdateProduct = () => {
           setName(product.name);
           setDescription(product.description);
           setPrice(product.price);
-          setExistingImage(product.image); // Load existing image URL
-          setImage(product.image); // Pre-fill input with existing image URL
+          setExistingImage(product.image);
+          setImage(product.image); 
         } else {
           alert("Failed to fetch product details.");
         }
@@ -48,7 +48,7 @@ const UpdateProduct = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedProduct), // Send JSON instead of FormData
+        body: JSON.stringify(updatedProduct), 
       });
 
       if (response.ok) {
@@ -67,7 +67,6 @@ const UpdateProduct = () => {
     <div className="p-6 max-w-lg mx-auto bg-white shadow-md rounded-lg">
       <h1 className="text-2xl font-bold text-center mb-5 text-blue-600">Update Product</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Product Name */}
         <div>
           <label className="block font-medium">Product Name</label>
           <input
@@ -78,8 +77,6 @@ const UpdateProduct = () => {
             required
           />
         </div>
-
-        {/* Product Image (Existing + URL Input) */}
         <div>
           <label className="block font-medium">Product Image URL</label>
           {existingImage && (
@@ -94,8 +91,6 @@ const UpdateProduct = () => {
             required
           />
         </div>
-
-        {/* Product Description */}
         <div>
           <label className="block font-medium">Description</label>
           <textarea
@@ -105,8 +100,6 @@ const UpdateProduct = () => {
             required
           />
         </div>
-
-        {/* Product Price */}
         <div>
           <label className="block font-medium">Price ($)</label>
           <input
@@ -117,8 +110,6 @@ const UpdateProduct = () => {
             required
           />
         </div>
-
-        {/* Submit Button */}
         <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition">
           Update Product
         </button>

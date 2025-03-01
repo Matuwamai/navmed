@@ -27,20 +27,14 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Mobile Toggle Button */}
       <button
         className="fixed top-0 left-5 z-50 text-white bg-blue-600 p-2 rounded-lg md:hidden"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
       </button>
-
-      {/* Sidebar */}
       <div className={`h-screen w-64 bg-blue-600 text-white flex flex-col p-5 fixed top-0 left-0 transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:relative`}>
-        {/* Sidebar Header */}
         <h1 className="text-2xl font-bold text-center mb-5">Navmed</h1>
-
-        {/* Navigation Links */}
         <nav className="flex flex-col gap-4">
           <Link to="/orders" className="flex items-center gap-3 p-2 hover:bg-blue-500 rounded-lg">
             <FaShoppingCart size={20} /> Orders

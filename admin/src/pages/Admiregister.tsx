@@ -27,7 +27,7 @@ const Register = () => {
         try {
             const response = await axios.post('http://localhost:5000/api/users/register', formData);
             setSuccess(response.data.message || 'User registered successfully!');
-            setTimeout(() => navigate('/login'), 2000); // Redirect to login after success
+            setTimeout(() => navigate('/login'), 2000); 
         } catch (err) {
             setError(err.response?.data?.message || 'Failed to register user. Try again.');
         } finally {

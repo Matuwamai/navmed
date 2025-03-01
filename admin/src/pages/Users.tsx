@@ -12,7 +12,6 @@ const Users = () => {
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    // Fetch users from API (Replace with your actual API endpoint)
     fetch("http://localhost:5000/api/users/users-lists")
       .then((res) => res.json())
       .then((data) => setUsers(data))

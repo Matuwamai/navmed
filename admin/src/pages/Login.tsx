@@ -18,7 +18,7 @@ const Login = () => {
             const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
             alert('Login successful');
             console.log(response.data);
-            navigate('/products'); // Redirect to products page
+            navigate('/products'); 
         } catch (err) {
             setError('Invalid email or password');
         } finally {
@@ -28,7 +28,6 @@ const Login = () => {
 
     return (
         <div className="h-screen grid grid-cols-2">
-            {/* Left Side (Background Image) */}
             <div className="loginpage h-screen relative flex items-center justify-center text-white">
                 <div className="absolute inset-0 bg-blue-600 opacity-50"></div>
                 <div className="relative z-10 text-center">
@@ -36,8 +35,6 @@ const Login = () => {
                     <h2 className="text-lg">Medical equipment e-commerce</h2>
                 </div>
             </div>
-
-            {/* Right Side (Login Form) */}
             <div className="flex flex-col items-center justify-center bg-blue-100">
                 <h1 className="text-2xl font-bold text-center text-blue-600 mb-4">
                     Welcome to Navmed Admin Dashboard

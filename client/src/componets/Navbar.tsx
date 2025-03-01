@@ -10,11 +10,11 @@ import {
 import {
   Navbar, NavbarBrand, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './Authcontext'; // Corrected import
+import { useAuth } from './Authcontext'; 
 import Logo from '../assets/logo.jpeg';
 
 function NavMedNavbar({ cartCount }: { cartCount: number }) {
-  const { isAuthenticated, fullName, logout } = useAuth(); // Use Auth Context
+  const { isAuthenticated, fullName, logout } = useAuth(); 
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -28,13 +28,12 @@ function NavMedNavbar({ cartCount }: { cartCount: number }) {
   };
 
   const handleLogout = () => {
-    logout(); // Call logout function from AuthContext
+    logout(); 
     navigate('/login');
   };
 
   return (
     <div className="bg-light">
-      {/* Top bar with phone and WhatsApp */}
       <div className="flex justify-content-between align-items-center px-3 py-1 bg-primary text-white small">
         <div className="d-flex align-items-center">
           <FaPhoneAlt className="me-2" />
@@ -53,8 +52,6 @@ function NavMedNavbar({ cartCount }: { cartCount: number }) {
           </a>
         </div>
       </div>
-
-      {/* Main Navbar */}
       <Navbar expand="lg" light className="bg-light shadow-sm mb-3">
         <div className="container-fluid d-flex justify-content-between align-items-center">
           {!showSearch && (
@@ -62,8 +59,6 @@ function NavMedNavbar({ cartCount }: { cartCount: number }) {
               <img src={Logo} alt="NavMed" height="70" />
             </NavbarBrand>
           )}
-
-          {/* Search Input */}
           <div className="d-flex align-items-center">
             {showSearch ? (
               <form onSubmit={handleSearchSubmit} className="d-flex w-100">
@@ -86,8 +81,6 @@ function NavMedNavbar({ cartCount }: { cartCount: number }) {
                 <FaSearch />
               </button>
             )}
-
-            {/* Cart Icon */}
             {!showSearch && (
               <a
                 href="/order"
@@ -96,26 +89,24 @@ function NavMedNavbar({ cartCount }: { cartCount: number }) {
               >
                 <FaShoppingCart />
                 {cartCount > 0 && (
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                     {cartCount}
                   </span>
                 )}
               </a>
             )}
-
-            {/* User Dropdown */}
             <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
               <DropdownToggle tag="button" className="btn btn-light me-2" style={{ color: '#ec0e63' }}>
-                <FaUser />
+                <FaUser  />
                 {isAuthenticated && fullName ? (
-                  <span className="text-blue-600">Hi {fullName [ ]}</span>
+                  <span className="text-primary"> {fullName}</span>
                 
                 ) : (
                   <span className="ms-2">Account</span>
                 )}
               </DropdownToggle>
               <DropdownMenu>
-                {isAuthenticated ? (
+                {isAuthenticated ? ( 
                   <>
                     <DropdownItem onClick={handleLogout}>
                       <FaSignOutAlt className="me-2" />

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 interface Order {
   id: number;
   name: string;
@@ -7,12 +6,9 @@ interface Order {
   contact: string;
   totalAmount: number;
 }
-
 const Orders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
-
   useEffect(() => {
-    // Fetch orders from API (Replace with your actual API endpoint)
     fetch("https://your-api-endpoint.com/orders")
       .then((res) => res.json())
       .then((data) => setOrders(data))
@@ -20,7 +16,6 @@ const Orders = () => {
   }, []);
 
   const handleViewDetails = (id: number) => {
-    // Handle view details logic (Redirect or open modal)
     console.log(`Viewing details for order ID: ${id}`);
   };
 

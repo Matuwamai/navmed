@@ -14,14 +14,14 @@ function ProductCard({ title, oldPrice, price, imageUrl }: ProductCardProps) {
         variant="top"
         src={imageUrl}
         alt={title}
-        className="img-fluid" // Ensures the image scales well
-        style={{ height: '250px', objectFit: 'cover' }} // Optional: keeps image proportions
+        className="img-fluid" 
+        style={{ height: '250px', objectFit: 'cover' }} 
       />
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>
           <span className="text-danger me-2" style={{ textDecoration: 'line-through' }}>
-            Ksh {oldPrice.toLocaleString()} {/* Assuming prices are numbers */}
+            Ksh {oldPrice.toLocaleString()}
           </span>
           <span className="fw-bold text-success">Ksh {price.toLocaleString()}</span>
         </Card.Text>

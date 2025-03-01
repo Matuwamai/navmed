@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useAuth } from "./componets/Authcontext";// Import the useAuth hook to access AuthContext
+import { useAuth } from "./componets/Authcontext";
 import NavMedNavbar from "./componets/Navbar";
 import HomePage from "./pages/Home";
 import ProductsPage from "./pages/Products";
@@ -9,10 +9,8 @@ import Register from "./pages/Register";
 import Footer from "./componets/Footer";
 
 const App: React.FC = () => {
-  const { isAuthenticated } = useAuth(); // Use AuthContext to get isAuthenticated
-
+  const { isAuthenticated } = useAuth(); 
   const basename = process.env.NODE_ENV === "production" ? "/navmed" : "";
-
   return (
     <Router basename={basename}>
       <NavMedNavbar cartCount={0} />

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-
 interface Product {
   id: number;
   image: string;
@@ -13,9 +11,7 @@ interface Product {
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate(); 
-
   useEffect(() => {
-    // Fetch products from API (Replace with your actual API endpoint)
     fetch(" http://localhost:5000/api/products")
       .then((res) => res.json())
       .then((data) => setProducts(data))
@@ -24,14 +20,10 @@ const Products = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      const endpoint = `http://localhost:5000/api/products/${id}/delete`; // Use the correct endpoint
-      console.log(`Deleting product from: ${endpoint}`); // Debugging
-  
-      await axios.delete(endpoint); // Use correct route
-  
+      const endpoint = `http://localhost:5000/api/products/${id}/delete`; 
+      console.log(`Deleting product from: ${endpoint}`); 
+      await axios.delete(endpoint); 
       alert("Product deleted successfully!");
-  
-      // Remove the deleted product from the UI
       setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id));
     } catch (error: any) {
       console.error("Error deleting product:", error.response?.data || error.message);
@@ -39,10 +31,8 @@ const Products = () => {
     }
   };
   const handleUpdate = (id: number) => {
-    navigate(`/products/update/${id}`); // Navigate to update page with the product ID
+    navigate(`/products/update/${id}`); 
   };
-
-
   return (
     <div className="p-5">
       <h1 className="text-2xl font-bold mb-4">Product List</h1>

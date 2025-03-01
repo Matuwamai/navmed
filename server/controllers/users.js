@@ -5,7 +5,6 @@ import db from "../db/index.js";
 export const register = async (req, res) => {
   try {
     const { fullName, email, password, contact } = req.body;
-    // check whether a user with the same email already exists
     const existingUser = await db.user.findFirst({
       where: {
         email,
@@ -25,8 +24,6 @@ export const register = async (req, res) => {
         contact,
       },
     });
-
-    // generate a JWT token
     const token = jwt.sign(
       { id: user.id, email: user.email },
       process.env.JWT_SECRET,

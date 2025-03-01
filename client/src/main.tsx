@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './index.css' // We'll create this next
-import { AuthProvider } from './componets/Authcontext'  // Import Auth Provider
+import './index.css' 
+import { AuthProvider } from './componets/Authcontext'  
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
