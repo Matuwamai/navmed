@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 interface Order {
   id: number;
-  userId: number; // Adjusted to match API response
+  userId: number; 
   totalAmount: number;
   createdAt: string;
   status: string;
@@ -18,7 +18,7 @@ const Orders: React.FC = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched orders:", data);
-        setOrders(data); // Ensure the data matches the expected structure
+        setOrders(data);
       })
       .catch((err) => console.error("Error fetching orders:", err));
   }, []);
@@ -28,12 +28,14 @@ const Orders: React.FC = () => {
   };
 
   return (
-    <div className="p-5">
+    <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Orders List</h1>
+
+      {/* Enable horizontal scrolling on small screens */}
       <div className="overflow-x-auto">
-        <table className="min-w-full border border-gray-300 shadow-md rounded-lg">
+        <table className="w-full min-w-[600px] border border-gray-300 shadow-md rounded-lg">
           <thead>
-            <tr className="bg-blue-600 text-white text-left">
+            <tr className="bg-blue-600 text-white text-left text-sm md:text-base">
               <th className="p-3">ID</th>
               <th className="p-3">User ID</th>
               <th className="p-3">Total Amount</th>
@@ -45,7 +47,7 @@ const Orders: React.FC = () => {
           <tbody>
             {orders.length > 0 ? (
               orders.map((order) => (
-                <tr key={order.id} className="border-b border-gray-200">
+                <tr key={order.id} className="border-b border-gray-200 text-sm md:text-base">
                   <td className="p-3">{order.id}</td>
                   <td className="p-3">{order.userId}</td>
                   <td className="p-3">Ksh {order.totalAmount.toFixed(2)}</td>

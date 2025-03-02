@@ -115,8 +115,6 @@ export const getUserOrders = async (req, res) => {
 export const getOrderDetails = async (req, res) => {
   try {
     const { orderId, userId } = req.params;
-
-    // Ensure both values are numbers
     const parsedOrderId = Number(orderId);
     const parsedUserId = Number(userId);
 
@@ -127,7 +125,7 @@ export const getOrderDetails = async (req, res) => {
     const order = await db.order.findUnique({
       where: {
         id: parsedOrderId,
-        userId: parsedUserId,  // Ensure your schema supports filtering by userId
+        userId: parsedUserId,  
       },
       include: {
         user: {

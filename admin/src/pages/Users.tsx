@@ -31,6 +31,7 @@ const Users = () => {
               <th className="p-3 text-sm md:text-base">Email</th>
               <th className="p-3 text-sm md:text-base">Contact</th>
               <th className="p-3 text-sm md:text-base">Created</th>
+
               <th className="p-3 text-sm md:text-base text-center">Actions</th>
             </tr>
           </thead>
@@ -41,7 +42,9 @@ const Users = () => {
                 <td className="p-3 text-xs md:text-sm">{user.fullName}</td>
                 <td className="p-3 text-xs md:text-sm">{user.email}</td>
                 <td className="p-3 text-xs md:text-sm">{user.contact}</td>
-                <td className="p-3 text-xs md:text-sm">{new Date(user.created_at).toLocaleDateString()}</td>
+                <td className="p-3 text-xs md:text-sm">{new Date(user.created_at).toLocaleString()}</td>
+              {/* <td className="p-3">{new Date(order.createdAt).toLocaleString()}</td> */}
+
                 <td className="p-3 text-center">
                   <button className="bg-gray-700 text-white text-xs md:text-sm px-3 py-1 rounded-md hover:bg-gray-900 transition">
                     View User

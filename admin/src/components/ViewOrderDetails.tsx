@@ -20,7 +20,7 @@ const ViewOrderDetails = () => {
 
             const data = await response.json();
             setOrder(data);
-            setError(""); // Clear previous errors if successful
+            setError(""); 
         } catch (err: any) {
             console.error("Error fetching order details:", err);
             setError(`Failed to load order: ${err.message}`);
@@ -46,7 +46,7 @@ const ViewOrderDetails = () => {
             body: JSON.stringify({ status: newStatus }),
         });
 
-        window.location.reload(); // Refresh to reflect status change
+        window.location.reload(); 
     };
 
     const handleDeleteOrder = async () => {
@@ -60,7 +60,7 @@ const ViewOrderDetails = () => {
             method: "DELETE",
         });
 
-        window.location.href = "/orders"; // Redirect to the orders list
+        window.location.href = "/orders"; 
     };
 
 
