@@ -9,6 +9,6 @@ orderRouter.get("/",  getOrders);
 orderRouter.get("/users/:userId", auth, getUserOrders);
 orderRouter.get("/:orderId/users/:userId",  getOrderDetails);
 orderRouter.put("/:orderId/edit",  updateOrderStatus);
-orderRouter.delete("/:orderId/delete", auth, isAdmin, deleteOrder);
+orderRouter.delete("/:orderId/delete", deleteOrder);
 
 export default orderRouter;
