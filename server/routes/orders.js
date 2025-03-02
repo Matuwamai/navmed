@@ -5,10 +5,10 @@ import { auth, isAdmin } from "../middleware/auth.js";
 const orderRouter = express.Router();
 
 orderRouter.post("/create", auth, createOrder);
-orderRouter.get("/", auth, isAdmin, getOrders);
+orderRouter.get("/",  getOrders);
 orderRouter.get("/users/:userId", auth, getUserOrders);
-orderRouter.get("/:orderId/users/:userId", auth, getOrderDetails);
-orderRouter.put("/:orderId/edit", auth, isAdmin, updateOrderStatus);
+orderRouter.get("/:orderId/users/:userId",  getOrderDetails);
+orderRouter.put("/:orderId/edit",  updateOrderStatus);
 orderRouter.delete("/:orderId/delete", auth, isAdmin, deleteOrder);
 
 export default orderRouter;

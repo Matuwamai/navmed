@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 interface Order {
   id: number;
-  name: string;
-  user: string;
-  contact: string;
+  userId: number; // Adjusted to match API response
   totalAmount: number;
+  createdAt: string;
+  status: string;
 }
-const Orders = () => {
+
+const Orders: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    fetch("https://your-api-endpoint.com/orders")
+    fetch("http://localhost:5000/api/orders")
       .then((res) => res.json())
-      .then((data) => setOrders(data))
+      .then((data) => {
+        console.log("Fetched orders:", data);
+        setOrders(data); // Ensure the data matches the expected structure
+      })
       .catch((err) => console.error("Error fetching orders:", err));
   }, []);
 
-  const handleViewDetails = (id: number) => {
-    console.log(`Viewing details for order ID: ${id}`);
+  const handleViewDetails = (id: number, userId: number) => {
+    navigate(`/orders/${id}/users/${userId}`); 
   };
 
   return (
@@ -27,32 +35,33 @@ const Orders = () => {
           <thead>
             <tr className="bg-blue-600 text-white text-left">
               <th className="p-3">ID</th>
-              <th className="p-3">Order Name</th>
-              <th className="p-3">User</th>
-              <th className="p-3">Contact</th>
+              <th className="p-3">User ID</th>
               <th className="p-3">Total Amount</th>
+              <th className="p-3">Status</th>
+              <th className="p-3">Created At</th>
               <th className="p-3 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
-              <tr key={order.id} className="border-b border-gray-200">
-                <td className="p-3">{order.id}</td>
-                <td className="p-3">{order.name}</td>
-                <td className="p-3">{order.user}</td>
-                <td className="p-3">{order.contact}</td>
-                <td className="p-3">${order.totalAmount.toFixed(2)}</td>
-                <td className="p-3 text-center">
-                  <button 
-                    onClick={() => handleViewDetails(order.id)}
-                    className="bg-gray-700 text-white px-3 py-2 rounded-md hover:bg-gray-900 transition"
-                  >
-                    View Details
-                  </button>
-                </td>
-              </tr>
-            ))}
-            {orders.length === 0 && (
+            {orders.length > 0 ? (
+              orders.map((order) => (
+                <tr key={order.id} className="border-b border-gray-200">
+                  <td className="p-3">{order.id}</td>
+                  <td className="p-3">{order.userId}</td>
+                  <td className="p-3">Ksh {order.totalAmount.toFixed(2)}</td>
+                  <td className="p-3">{order.status}</td>
+                  <td className="p-3">{new Date(order.createdAt).toLocaleString()}</td>
+                  <td className="p-3 text-center">
+                    <button
+                      onClick={() => handleViewDetails(order.id, order.userId)}
+                      className="bg-gray-700 text-white px-3 py-2 rounded-md hover:bg-gray-900 transition"
+                    >
+                      View Details
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
               <tr>
                 <td colSpan={6} className="text-center p-3">
                   No orders found.

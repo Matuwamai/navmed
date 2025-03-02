@@ -112,14 +112,22 @@ export const getUserOrders = async (req, res) => {
     res.status(500).json({ message: "Error fetching orders" });
   }
 };
-
 export const getOrderDetails = async (req, res) => {
   try {
     const { orderId, userId } = req.params;
+
+    // Ensure both values are numbers
+    const parsedOrderId = Number(orderId);
+    const parsedUserId = Number(userId);
+
+    if (isNaN(parsedOrderId) || isNaN(parsedUserId)) {
+      return res.status(400).json({ message: "Invalid orderId or userId" });
+    }
+
     const order = await db.order.findUnique({
       where: {
-        id: Number(orderId),
-        userId: Number(userId),
+        id: parsedOrderId,
+        userId: parsedUserId,  // Ensure your schema supports filtering by userId
       },
       include: {
         user: {
@@ -141,6 +149,11 @@ export const getOrderDetails = async (req, res) => {
         },
       },
     });
+
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
     res.status(200).json(order);
   } catch (error) {
     console.log(error);

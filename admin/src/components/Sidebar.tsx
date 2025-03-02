@@ -28,7 +28,7 @@ const Sidebar = () => {
   return (
     <>
       <button
-        className="fixed top-0 left-5 z-50 text-white bg-blue-600 p-2 rounded-lg md:hidden"
+        className="fixed top-4 left-5 z-50 text-white bg-blue-600 p-2 rounded-lg md:hidden"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
