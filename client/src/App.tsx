@@ -10,9 +10,8 @@ import Footer from "./componets/Footer";
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth(); 
-  const basename = process.env.NODE_ENV === "production" ? "/navmed" : "";
   return (
-    <Router basename={basename}>
+    <Router >
       <NavMedNavbar cartCount={0} />
       <div className="container mt-4">
         <Routes>
